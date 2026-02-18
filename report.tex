@@ -1,0 +1,558 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Assignment Bioinformatics Basics Report},
+  pdfauthor={Taylor Falk},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Assignment Bioinformatics Basics Report}
+\author{Taylor Falk}
+\date{11/17/2021}
+
+\begin{document}
+\maketitle
+
+\textbf{Please read this brief introduction to R Markdown, and complete
+the second half of the document yourself.}
+
+\section{R Markdown}\label{r-markdown}
+
+R Markdown, \texttt{.Rmd} files, are a type of markdown files that can
+execute R code in an R environment. Markdown is an open source language
+used for easily creating documents such as web pages and PDFs. Markdown
+and R Markdown can be used to procedurally generate documents and
+reports, which have a wide number of use-cases across bioinformatics.
+Not only can you save time by creating code to automatically draft
+documents, you can also include detailed instructions and information
+alongside your code.
+
+\subsection{knitr}\label{knitr}
+
+\texttt{knitr} is simply the package R uses to convert the R Markdown
+into the appropriate output (HTML, PDF, or Word). While there is a deep
+level of customization available, most users can comfortably create
+beautiful documents with the default parameters. In order to compile
+your markdown, in RStudio you can select the \texttt{Knit} button below
+the open file button.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Markdown Basics}\label{markdown-basics}
+
+The raw markdown, which you may or may not be looking at, is styled very
+basically. The largest titles start with one octothorpe \texttt{\#}. The
+more \texttt{\#}'s added, the smaller a title or header becomes.
+
+\section{Biggest}\label{biggest}
+
+\subsection{2nd Biggest}\label{nd-biggest}
+
+\subsubsection{so on}\label{so-on}
+
+\paragraph{and so forth}\label{and-so-forth}
+
+\subparagraph{until you have}\label{until-you-have}
+
+six octothorpes
+
+then nothing happens.
+
+Importantly, two spaces (\texttt{}) can be included after a line of text
+to start a new line.
+
+Markdown can be styled a few different ways:\\
+\texttt{\_italics\_} -\textgreater{} \emph{italics}\\
+\texttt{**bold**} -\textgreater{} \textbf{bold}\\
+\texttt{\textasciigrave{}monospace\textasciigrave{}} -\textgreater{}
+\texttt{monospace}, good for code
+
+A good cheat sheet is the
+\href{https://www.markdownguide.org/cheat-sheet}{Markdown Guide Cheat
+Sheet}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{R Code in Markdown}\label{r-code-in-markdown}
+
+The really vital part of R Markdown is the inclusion of code snippets
+you can place into the document, which will run and print out to users.
+In this snippet I create a function that says hello and that text is
+printed inside the document.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{say\_hi }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{}
+  \FunctionTok{return}\NormalTok{(}\StringTok{"Hello world."}\NormalTok{)}
+\NormalTok{\}}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{say\_hi}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello world."
+\end{verbatim}
+
+The syntax of the **snippet* is simple, with three back ticks
+\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}} indicating
+the start and end of the snippet, and a lower case \texttt{r} in curly
+braces \texttt{\{\}} to indicate what language is used: \texttt{\{r\}}
+indicates R, \texttt{\{python\}} indicates Python. R Markdown does not
+support every language, but there are use cases where one document
+running both R and Python code can prove extremely useful and concise.
+There is also a button in RStudio to insert a snippet, it is a small
+green \texttt{+C} in the top right of the editor.
+
+I can also test my code in RStudio without having to knit the entire
+document by pressing the green ``Play'' arrow on the snippet I am
+interested in.
+
+Finally, R Markdown scripts can \texttt{source()} other \texttt{.R}
+scripts and use them in their execution environment. This mean I can
+define a function in my \texttt{main.R} script and use it in my R
+Markdown snippets. Note that the converse is true, using
+\texttt{knitr::purl()}, and the code established in an R Markdown can be
+sourced, and \emph{tested}, using an normal \texttt{.R} script.
+
+Also note that the environment is carried from one snippet to another,
+so if I define a function or load a file in one snippet I can use those
+objects in later snippets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{message }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}The last example...for now.\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(message, }\StringTok{\textquotesingle{}But there}\SpecialCharTok{\textbackslash{}\textquotesingle{}}\StringTok{s always room for more.\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The last example...for now. But there's always room for more."
+\end{verbatim}
+
+\section{Assignment}\label{assignment}
+
+Using what you know from this document and the \texttt{main.R} script,
+use the functions from \texttt{main.R} to draw a boxplot of expression
+levels. Use this R Markdown document to describe your code as you are
+using it in this document, as done above. Take time to enhance your
+ggplot function from the \texttt{main.R} script with high quality visual
+aesthetics. Do not use default ggplot colors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# use source to load your functions from main.R into this document.}
+\FunctionTok{source}\NormalTok{(}\StringTok{"main.R"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{\texorpdfstring{Loading CSV with
+\texttt{load\_expression()}}{Loading CSV with load\_expression()}}\label{loading-csv-with-load_expression}
+
+Importing data into R effectively is crucial. For our tasks, we prefer
+the tibble format, a modern representation of data frames in R. Load the
+data into a tibble as we have done in prior assignments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load the expression data}
+\NormalTok{result\_tib }\OtherTok{\textless{}{-}} \FunctionTok{load\_expression}\NormalTok{(}\StringTok{"data/example\_intensity\_data\_subset.csv"}\NormalTok{)}
+\NormalTok{result\_tib }\CommentTok{\# Display the initial rows of the data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,000 x 36
+##    probe   GSM972389 GSM972390 GSM972396 GSM972401 GSM972409 GSM972412 GSM972413
+##    <chr>       <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>
+##  1 242413~      4.41      4.23      4.54      4.17      4.45      4.74      4.57
+##  2 155640~      2.89      2.85      2.89      2.94      2.93      2.91      2.76
+##  3 220640~      4.12      3.77      3.98      3.62      3.64      4.39      4.24
+##  4 220425~      3.33      3.87      3.65      3.51      3.46      3.42      3.76
+##  5 228274~      6.57      7.00      6.59      6.52      6.81      6.38      5.71
+##  6 155605~      4.89      2.41      4.79      3.46      3.92      5.43      4.37
+##  7 236154~      3.07      3.48      2.81      4.19      3.12      3.07      4.57
+##  8 237185~      4.11      4.31      4.39      3.71      4.06      4.81      3.86
+##  9 229683~      3.49      3.71      3.78      3.60      3.35      4.06      3.76
+## 10 157011~      2.87      2.86      2.60      2.51      2.82      2.62      2.55
+## # i 990 more rows
+## # i 28 more variables: GSM972422 <dbl>, GSM972429 <dbl>, GSM972433 <dbl>,
+## #   GSM972438 <dbl>, GSM972440 <dbl>, GSM972443 <dbl>, GSM972444 <dbl>,
+## #   GSM972446 <dbl>, GSM972453 <dbl>, GSM972457 <dbl>, GSM972459 <dbl>,
+## #   GSM972463 <dbl>, GSM972467 <dbl>, GSM972472 <dbl>, GSM972473 <dbl>,
+## #   GSM972475 <dbl>, GSM972476 <dbl>, GSM972477 <dbl>, GSM972479 <dbl>,
+## #   GSM972480 <dbl>, GSM972487 <dbl>, GSM972488 <dbl>, GSM972489 <dbl>, ...
+\end{verbatim}
+
+\subsection{\texorpdfstring{Filtering Rows with
+\texttt{filter\_15()}}{Filtering Rows with filter\_15()}}\label{filtering-rows-with-filter_15}
+
+To effectively work with our slightly vast dataset, it's essential to
+filter out rows that don't meet certain criteria. The
+\texttt{filter\_15()} function does precisely this by retaining rows
+where at least 15\% of the values surpass a log2(15) expression
+level---equivalent to approximately 3.9. Notably, the function returns
+only the probe IDs, providing a summarized view of the dataset that
+meets the criteria.
+
+While one might initially consider using traditional loops for row-wise
+operations, such methods can be inefficient for large datasets.
+Leveraging functions from the Tidyverse, particularly from the
+\texttt{dplyr} package, offers a more efficient and readable approach.
+Functions like \texttt{filter()} and \texttt{mutate()} allow for swift
+data transformations, enhancing both clarity and performance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filtered\_probes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{filter\_15}\NormalTok{(result\_tib)}\SpecialCharTok{$}\NormalTok{probe)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Original number of probes in unfiltered data: "}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(result\_tib)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Original number of probes in unfiltered data: 1000"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Probes remaining in filtered dataset: "}\NormalTok{, }\FunctionTok{length}\NormalTok{(filtered\_probes))) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Probes remaining in filtered dataset: 701"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#tibble of probes that survive the filter}
+\FunctionTok{filter\_15}\NormalTok{(result\_tib)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 701 x 1
+##    probe      
+##    <chr>      
+##  1 242413_at  
+##  2 220640_at  
+##  3 228274_at  
+##  4 1556054_at 
+##  5 237185_at  
+##  6 229683_s_at
+##  7 242882_at  
+##  8 222032_s_at
+##  9 204735_at  
+## 10 205732_s_at
+## # i 691 more rows
+\end{verbatim}
+
+\subsection{\texorpdfstring{Converting Affy IDs to HGNC Names:
+\texttt{affy\_to\_hgnc()}}{Converting Affy IDs to HGNC Names: affy\_to\_hgnc()}}\label{converting-affy-ids-to-hgnc-names-affy_to_hgnc}
+
+Gene data often involves various identifiers, and converting between
+these can be crucial for data integration. The function
+\texttt{affy\_to\_hgnc()} serves this purpose by linking Affymetrix
+probe IDs to HGNC gene IDs using the \texttt{biomaRt} package. However,
+while \texttt{biomaRt} offers a direct connection to Ensembl, a
+comprehensive genomic database, its reliance on external APIs can lead
+to occasional connectivity issues. If errors arise during usage, they're
+often due to these external connections rather than the code itself.
+
+When implementing, remember:
+
+\begin{itemize}
+\item
+  Use the \texttt{ENSEMBL\_MART\_ENSEMBL} biomart and the
+  \texttt{hsapiens\_gene\_ensembl} dataset.
+\item
+  Fetch the attributes \texttt{"affy\_hg\_u133\_plus\_2"} and
+  \texttt{"hgnc\_symbol"}.
+\item
+  Despite the function aiming to return a tibble, \texttt{biomaRt}'s
+  \texttt{getBM()} only deals with data.frames. Utilize
+  \texttt{dplyr::pull()} to transform a tibble to a character vector,
+  and \texttt{dplyr::as\_tibble()} for converting a data frame back to a
+  tibble.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Converting a sample affy ID to HGNC}
+\FunctionTok{filter\_15}\NormalTok{(result\_tib) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{affy\_to\_hgnc}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ gene\_names}
+\NormalTok{gene\_names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 680 x 2
+##    affy_hg_u133_plus_2 hgnc_symbol
+##    <chr>               <chr>      
+##  1 1553900_s_at        ""         
+##  2 223106_at           "TMEM14C"  
+##  3 210408_s_at         "CPNE6"    
+##  4 216389_s_at         "DCAF11"   
+##  5 211074_at           ""         
+##  6 211765_x_at         "PPIAP22"  
+##  7 224578_at           "RCC2"     
+##  8 1555613_a_at        "ZAP70"    
+##  9 241939_at           "IQGAP3"   
+## 10 208664_s_at         "TTC3"     
+## # i 670 more rows
+\end{verbatim}
+
+\subsection{Refining Data with
+reduce\_data()}\label{refining-data-with-reduce_data}
+
+Our data preparation's ultimate goal is to streamline the dataset,
+focusing on relevant genes to make visualization more efficient with
+ggplot from the tidyverse package. The reduce\_data() function serves
+this purpose by integrating various inputs, such as:
+
+The original expression data. Probe IDs linked to HGNC symbols. Lists of
+`good' and `bad' gene names. The function operates as follows:
+
+\begin{itemize}
+\item
+  Matches probe IDs with HGNC symbols using the base function match().
+\item
+  Introduces the new data at the appropriate position using
+  tibble::add\_column().
+\item
+  Segregates the genes into two categories, `good' and `bad', leveraging
+  the which() function and the \%in\% operator.
+\end{itemize}
+
+In the end, the output is a tibble streamlined to only the genes of
+interest, with a dedicated column indicating the gene's category.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sample data and gene lists}
+\NormalTok{goodGenes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"SLC1A4"}\NormalTok{, }\StringTok{"MGAT5B"}\NormalTok{, }\StringTok{"LINC02907"}\NormalTok{, }\StringTok{"BRIP1"}\NormalTok{, }\StringTok{"NRIP1"}\NormalTok{, }\StringTok{"TGDS"}\NormalTok{, }\StringTok{"PSMD10"}\NormalTok{)}
+\NormalTok{badGenes }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"MAF"}\NormalTok{, }\StringTok{"PLD4"}\NormalTok{, }\StringTok{"LIG3"}\NormalTok{, }\StringTok{"RARA"}\NormalTok{, }\StringTok{"NOTCH4"}\NormalTok{, }\StringTok{"USP8"}\NormalTok{, }\StringTok{"RARG"}\NormalTok{)}
+
+\CommentTok{\# Applying the function}
+\NormalTok{reduced\_data }\OtherTok{\textless{}{-}} \FunctionTok{reduce\_data}\NormalTok{(result\_tib, gene\_names, goodGenes, badGenes)}
+\NormalTok{reduced\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 38
+##    probe  hgnc_symbol gene_set GSM972389 GSM972390 GSM972396 GSM972401 GSM972409
+##    <chr>  <chr>       <chr>        <dbl>     <dbl>     <dbl>     <dbl>     <dbl>
+##  1 20260~ NRIP1       good          9.61      7.01      9.55      7.38      8.61
+##  2 20259~ NRIP1       good          9.08      7.77      9.23      8.24      7.96
+##  3 15545~ PSMD10      good          8.81      7.88      8.55      8.47      9.12
+##  4 15539~ LINC02907   good          4.59      4.65      4.70      4.46      4.75
+##  5 23560~ BRIP1       good          6.29      4.79      6.00      5.74      4.79
+##  6 23844~ MGAT5B      good          5.26      5.97      5.34      5.02      4.96
+##  7 20824~ TGDS        good          8.22      6.74      7.31      7.18      7.18
+##  8 24437~ SLC1A4      good          4.40      3.84      4.36      4.15      4.14
+##  9 20934~ MAF         bad           7.98      7.27      6.32      8.80      9.62
+## 10 22986~ LIG3        bad           6.71      5.22      5.95      5.21      5.84
+## 11 21630~ RARA        bad           5.83      6.46      6.05      6.70      6.23
+## 12 20418~ RARG        bad           6.35      7.46      6.88      6.88      7.10
+## 13 24078~ NOTCH4      bad           4.72      5.09      4.89      4.74      4.70
+## 14 22950~ USP8        bad           6.52      5.37      6.75      6.49      5.38
+## # i 30 more variables: GSM972412 <dbl>, GSM972413 <dbl>, GSM972422 <dbl>,
+## #   GSM972429 <dbl>, GSM972433 <dbl>, GSM972438 <dbl>, GSM972440 <dbl>,
+## #   GSM972443 <dbl>, GSM972444 <dbl>, GSM972446 <dbl>, GSM972453 <dbl>,
+## #   GSM972457 <dbl>, GSM972459 <dbl>, GSM972463 <dbl>, GSM972467 <dbl>,
+## #   GSM972472 <dbl>, GSM972473 <dbl>, GSM972475 <dbl>, GSM972476 <dbl>,
+## #   GSM972477 <dbl>, GSM972479 <dbl>, GSM972480 <dbl>, GSM972487 <dbl>,
+## #   GSM972488 <dbl>, GSM972489 <dbl>, GSM972496 <dbl>, GSM972502 <dbl>, ...
+\end{verbatim}
+
+\subsection{Analysis of Gene Expression
+Data}\label{analysis-of-gene-expression-data}
+
+In our analysis, we aim to visualize the gene expression data for genes
+categorized as `good' and `bad'. We are using good and bad arbitrarily
+to represent two potentially interesting groups of genes. Before
+visualizing, it's crucial to ensure our data is structured correctly. We
+would like to plot this data as a boxplot and so we will reformat the
+data to ``long'' format to enable seamless plotting in ggplot2.
+
+\subsubsection{Convert Data Format}\label{convert-data-format}
+
+First, we'll look at our reduced data from the previous function. This
+new function, \texttt{convert\_to\_long} should properly convert this
+output to ``long'' format with the old sample columns (GSM972389, etc.)
+in a new column called ``sample'', and the values column named `values'
+(the default).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# original data in "wide" format}
+\NormalTok{reduced\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 38
+##    probe  hgnc_symbol gene_set GSM972389 GSM972390 GSM972396 GSM972401 GSM972409
+##    <chr>  <chr>       <chr>        <dbl>     <dbl>     <dbl>     <dbl>     <dbl>
+##  1 20260~ NRIP1       good          9.61      7.01      9.55      7.38      8.61
+##  2 20259~ NRIP1       good          9.08      7.77      9.23      8.24      7.96
+##  3 15545~ PSMD10      good          8.81      7.88      8.55      8.47      9.12
+##  4 15539~ LINC02907   good          4.59      4.65      4.70      4.46      4.75
+##  5 23560~ BRIP1       good          6.29      4.79      6.00      5.74      4.79
+##  6 23844~ MGAT5B      good          5.26      5.97      5.34      5.02      4.96
+##  7 20824~ TGDS        good          8.22      6.74      7.31      7.18      7.18
+##  8 24437~ SLC1A4      good          4.40      3.84      4.36      4.15      4.14
+##  9 20934~ MAF         bad           7.98      7.27      6.32      8.80      9.62
+## 10 22986~ LIG3        bad           6.71      5.22      5.95      5.21      5.84
+## 11 21630~ RARA        bad           5.83      6.46      6.05      6.70      6.23
+## 12 20418~ RARG        bad           6.35      7.46      6.88      6.88      7.10
+## 13 24078~ NOTCH4      bad           4.72      5.09      4.89      4.74      4.70
+## 14 22950~ USP8        bad           6.52      5.37      6.75      6.49      5.38
+## # i 30 more variables: GSM972412 <dbl>, GSM972413 <dbl>, GSM972422 <dbl>,
+## #   GSM972429 <dbl>, GSM972433 <dbl>, GSM972438 <dbl>, GSM972440 <dbl>,
+## #   GSM972443 <dbl>, GSM972444 <dbl>, GSM972446 <dbl>, GSM972453 <dbl>,
+## #   GSM972457 <dbl>, GSM972459 <dbl>, GSM972463 <dbl>, GSM972467 <dbl>,
+## #   GSM972472 <dbl>, GSM972473 <dbl>, GSM972475 <dbl>, GSM972476 <dbl>,
+## #   GSM972477 <dbl>, GSM972479 <dbl>, GSM972480 <dbl>, GSM972487 <dbl>,
+## #   GSM972488 <dbl>, GSM972489 <dbl>, GSM972496 <dbl>, GSM972502 <dbl>, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# data in long format for easy plotting in ggplot2}
+\NormalTok{long\_format\_data }\OtherTok{\textless{}{-}} \FunctionTok{convert\_to\_long}\NormalTok{(reduced\_data)}
+\NormalTok{long\_format\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 490 x 5
+##    probe       hgnc_symbol gene_set sample    value
+##    <chr>       <chr>       <chr>    <chr>     <dbl>
+##  1 202600_s_at NRIP1       good     GSM972389  9.61
+##  2 202600_s_at NRIP1       good     GSM972390  7.01
+##  3 202600_s_at NRIP1       good     GSM972396  9.55
+##  4 202600_s_at NRIP1       good     GSM972401  7.38
+##  5 202600_s_at NRIP1       good     GSM972409  8.61
+##  6 202600_s_at NRIP1       good     GSM972412  9.31
+##  7 202600_s_at NRIP1       good     GSM972413  9.10
+##  8 202600_s_at NRIP1       good     GSM972422  7.88
+##  9 202600_s_at NRIP1       good     GSM972429  6.99
+## 10 202600_s_at NRIP1       good     GSM972433  8.87
+## # i 480 more rows
+\end{verbatim}
+
+\subsection{Plotting the expression values as a boxplot using
+ggplot2}\label{plotting-the-expression-values-as-a-boxplot-using-ggplot2}
+
+Now, with our data in long format, we can visualize the distribution of
+gene expression values for the `good' and `bad' gene sets. Please use
+ggplot2 to construct a boxplot akin to the one you see in the
+reference\_report.html. You do \emph{not} need to do this in a function,
+use the space provided below to create this plot.
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-latex/boxplot from long format data using ggplot2-1.pdf}}
+
+\end{document}
